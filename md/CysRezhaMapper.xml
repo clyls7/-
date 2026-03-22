@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huaan.mes.md.mapper.CysRezhaMapper">
+    
+    <resultMap type="CysRezha" id="CysRezhaResult">
+        <result property="hotrollId"    column="hotroll_id"    />
+        <result property="hotrollCode"    column="hotroll_code"    />
+        <result property="workorderId"    column="workorder_id"    />
+        <result property="workorderCode"    column="workorder_code"    />
+        <result property="brand"    column="brand"    />
+        <result property="batchNumber"    column="batch_number"    />
+        <result property="heatfLocation"    column="heatf_location"    />
+        <result property="heatTime"    column="heat_time"    />
+        <result property="rollTime"    column="roll_time"    />
+        <result property="heatTemperature"    column="heat_temperature"    />
+        <result property="installationDate"    column="installation_date"    />
+        <result property="weightBeforeRoll"    column="weight_before_roll"    />
+        <result property="weightAfterRoll"    column="weight_after_roll"    />
+        <result property="userId"    column="user_id"    />
+        <result property="userName"    column="user_name"    />
+        <result property="qualityJudgment"    column="quality_judgment"    />
+        <result property="abnormalCause"    column="abnormal_cause"    />
+        <result property="remark"    column="remark"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectCysRezhaVo">
+        select hotroll_id, hotroll_code, workorder_id, workorder_code, brand, batch_number, heatf_location, heat_time, roll_time, heat_temperature, installation_date, weight_before_roll, weight_after_roll, user_id, user_name, quality_judgment, abnormal_cause, remark, create_by, create_time, update_by, update_time from cys_rezha
+    </sql>
+
+    <select id="selectCysRezhaList" parameterType="CysRezha" resultMap="CysRezhaResult">
+        <include refid="selectCysRezhaVo"/>
+        <where>  
+            <if test="hotrollCode != null  and hotrollCode != ''"> and hotroll_code = #{hotrollCode}</if>
+            <if test="workorderId != null "> and workorder_id = #{workorderId}</if>
+            <if test="workorderCode != null  and workorderCode != ''"> and workorder_code = #{workorderCode}</if>
+            <if test="brand != null  and brand != ''"> and brand = #{brand}</if>
+            <if test="batchNumber != null  and batchNumber != ''"> and batch_number = #{batchNumber}</if>
+            <if test="heatfLocation != null  and heatfLocation != ''"> and heatf_location = #{heatfLocation}</if>
+            <if test="heatTime != null "> and heat_time = #{heatTime}</if>
+            <if test="rollTime != null "> and roll_time = #{rollTime}</if>
+            <if test="heatTemperature != null "> and heat_temperature = #{heatTemperature}</if>
+            <if test="installationDate != null "> and installation_date = #{installationDate}</if>
+            <if test="weightBeforeRoll != null "> and weight_before_roll = #{weightBeforeRoll}</if>
+            <if test="weightAfterRoll != null "> and weight_after_roll = #{weightAfterRoll}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="qualityJudgment != null  and qualityJudgment != ''"> and quality_judgment = #{qualityJudgment}</if>
+            <if test="abnormalCause != null  and abnormalCause != ''"> and abnormal_cause = #{abnormalCause}</if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
+    
+    <select id="selectCysRezhaByHotrollId" parameterType="String" resultMap="CysRezhaResult">
+        <include refid="selectCysRezhaVo"/>
+        where hotroll_id = #{hotrollId}
+    </select>
+        
+    <insert id="insertCysRezha" parameterType="CysRezha">
+        insert into cys_rezha
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="hotrollId != null">hotroll_id,</if>
+            <if test="hotrollCode != null">hotroll_code,</if>
+            <if test="workorderId != null">workorder_id,</if>
+            <if test="workorderCode != null">workorder_code,</if>
+            <if test="brand != null">brand,</if>
+            <if test="batchNumber != null">batch_number,</if>
+            <if test="heatfLocation != null">heatf_location,</if>
+            <if test="heatTime != null">heat_time,</if>
+            <if test="rollTime != null">roll_time,</if>
+            <if test="heatTemperature != null">heat_temperature,</if>
+            <if test="installationDate != null">installation_date,</if>
+            <if test="weightBeforeRoll != null">weight_before_roll,</if>
+            <if test="weightAfterRoll != null">weight_after_roll,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="userName != null">user_name,</if>
+            <if test="qualityJudgment != null">quality_judgment,</if>
+            <if test="abnormalCause != null">abnormal_cause,</if>
+            <if test="remark != null">remark,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="hotrollId != null">#{hotrollId},</if>
+            <if test="hotrollCode != null">#{hotrollCode},</if>
+            <if test="workorderId != null">#{workorderId},</if>
+            <if test="workorderCode != null">#{workorderCode},</if>
+            <if test="brand != null">#{brand},</if>
+            <if test="batchNumber != null">#{batchNumber},</if>
+            <if test="heatfLocation != null">#{heatfLocation},</if>
+            <if test="heatTime != null">#{heatTime},</if>
+            <if test="rollTime != null">#{rollTime},</if>
+            <if test="heatTemperature != null">#{heatTemperature},</if>
+            <if test="installationDate != null">#{installationDate},</if>
+            <if test="weightBeforeRoll != null">#{weightBeforeRoll},</if>
+            <if test="weightAfterRoll != null">#{weightAfterRoll},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="userName != null">#{userName},</if>
+            <if test="qualityJudgment != null">#{qualityJudgment},</if>
+            <if test="abnormalCause != null">#{abnormalCause},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCysRezha" parameterType="CysRezha">
+        update cys_rezha
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="hotrollCode != null">hotroll_code = #{hotrollCode},</if>
+            <if test="workorderId != null">workorder_id = #{workorderId},</if>
+            <if test="workorderCode != null">workorder_code = #{workorderCode},</if>
+            <if test="brand != null">brand = #{brand},</if>
+            <if test="batchNumber != null">batch_number = #{batchNumber},</if>
+            <if test="heatfLocation != null">heatf_location = #{heatfLocation},</if>
+            <if test="heatTime != null">heat_time = #{heatTime},</if>
+            <if test="rollTime != null">roll_time = #{rollTime},</if>
+            <if test="heatTemperature != null">heat_temperature = #{heatTemperature},</if>
+            <if test="installationDate != null">installation_date = #{installationDate},</if>
+            <if test="weightBeforeRoll != null">weight_before_roll = #{weightBeforeRoll},</if>
+            <if test="weightAfterRoll != null">weight_after_roll = #{weightAfterRoll},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="qualityJudgment != null">quality_judgment = #{qualityJudgment},</if>
+            <if test="abnormalCause != null">abnormal_cause = #{abnormalCause},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where hotroll_id = #{hotrollId}
+    </update>
+
+    <delete id="deleteCysRezhaByHotrollId" parameterType="String">
+        delete from cys_rezha where hotroll_id = #{hotrollId}
+    </delete>
+
+    <delete id="deleteCysRezhaByHotrollIds" parameterType="String">
+        delete from cys_rezha where hotroll_id in 
+        <foreach item="hotrollId" collection="array" open="(" separator="," close=")">
+            #{hotrollId}
+        </foreach>
+    </delete>
+</mapper>

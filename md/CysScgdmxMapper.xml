@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huaan.mes.md.mapper.CysScgdmxMapper">
+    
+    <resultMap type="CysScgdmx" id="CysScgdmxResult">
+        <result property="workId"    column="work_id"    />
+        <result property="scgdmxId"    column="scgdmx_id"    />
+        <result property="workCode"    column="work_code"    />
+        <result property="porderCode"    column="porder_code"    />
+        <result property="porderName"    column="porder_name"    />
+        <result property="cpfpParentid"    column="cpfp_parentid"    />
+        <result property="submitTime"    column="submit_time"    />
+        <result property="workStatus"    column="work_status"    />
+        <result property="thisProcess"    column="this_process"    />
+        <result property="nextProcess"    column="next_process"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="brand"    column="brand"    />
+        <result property="batchNumber"    column="batch_number"    />
+        <result property="plannedOrdersCode"    column="planned_orders_code"    />
+        <result property="demandTime"    column="demand_time"    />
+        <result property="itemId"    column="item_id"    />
+        <result property="itemCode"    column="item_code"    />
+        <result property="itemName"    column="item_name"    />
+        <result property="unit"    column="unit"    />
+        <result property="clientId"    column="client_id"    />
+        <result property="clientCode"    column="client_code"    />
+        <result property="clientName"    column="client_name"    />
+        <result property="performanceReq"    column="performance_req"    />
+        <result property="qualityReq"    column="quality_req"    />
+        <result property="packageReq"    column="package_req"    />
+        <result property="remark"    column="remark"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectCysScgdmxVo">
+        select work_id, scgdmx_id, work_code, porder_code, porder_name, cpfp_parentid, submit_time, work_status, this_process, next_process, start_time, end_time, brand, batch_number, planned_orders_code, demand_time, item_id, item_code, item_name, unit, client_id, client_code, client_name, performance_req, quality_req, package_req, remark, create_by, create_time, update_by, update_time from cys_scgdmx
+    </sql>
+
+    <select id="selectCysScgdmxList" parameterType="CysScgdmx" resultMap="CysScgdmxResult">
+        <include refid="selectCysScgdmxVo"/>
+        <where>
+            <if test="scgdmxId != null "> and work_id = #{scgdmxId}</if>
+            <if test="workId != null "> and work_id = #{workId}</if>
+            <if test="workCode != null  and workCode != ''"> and work_code = #{workCode}</if>
+            <if test="porderCode != null  and porderCode != ''"> and porder_code = #{porderCode}</if>
+            <if test="porderName != null  and porderName != ''"> and porder_name like concat('%', #{porderName}, '%')</if>
+            <if test="cpfpParentid != null "> and cpfp_parentid = #{cpfpParentid}</if>
+            <if test="submitTime != null "> and submit_time = #{submitTime}</if>
+            <if test="workStatus != null  and workStatus != ''"> and work_status = #{workStatus}</if>
+            <if test="thisProcess != null  and thisProcess != ''"> and this_process = #{thisProcess}</if>
+            <if test="nextProcess != null  and nextProcess != ''"> and next_process = #{nextProcess}</if>
+            <if test="startTime != null "> and start_time = #{startTime}</if>
+            <if test="endTime != null "> and end_time = #{endTime}</if>
+            <if test="brand != null  and brand != ''"> and brand = #{brand}</if>
+            <if test="batchNumber != null  and batchNumber != ''"> and batch_number = #{batchNumber}</if>
+            <if test="plannedOrdersCode != null  and plannedOrdersCode != ''"> and planned_orders_code = #{plannedOrdersCode}</if>
+            <if test="demandTime != null "> and demand_time = #{demandTime}</if>
+            <if test="itemId != null  and itemId != ''"> and item_id = #{itemId}</if>
+            <if test="itemCode != null  and itemCode != ''"> and item_code = #{itemCode}</if>
+            <if test="itemName != null  and itemName != ''"> and item_name like concat('%', #{itemName}, '%')</if>
+            <if test="unit != null  and unit != ''"> and unit = #{unit}</if>
+            <if test="clientId != null "> and client_id = #{clientId}</if>
+            <if test="clientCode != null  and clientCode != ''"> and client_code = #{clientCode}</if>
+            <if test="clientName != null  and clientName != ''"> and client_name like concat('%', #{clientName}, '%')</if>
+            <if test="performanceReq != null  and performanceReq != ''"> and performance_req = #{performanceReq}</if>
+            <if test="qualityReq != null  and qualityReq != ''"> and quality_req = #{qualityReq}</if>
+            <if test="packageReq != null  and packageReq != ''"> and package_req = #{packageReq}</if>
+        </where>
+    </select>
+    
+    <select id="selectCysScgdmxByWorkId" parameterType="Long" resultMap="CysScgdmxResult">
+        <include refid="selectCysScgdmxVo"/>
+        where scgdmx_id = #{scgdmxId}
+    </select>
+        
+    <insert id="insertCysScgdmx" parameterType="CysScgdmx" useGeneratedKeys="true" keyProperty="workId">
+        insert into cys_scgdmx
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="scgdmxId != null">scgdmx_id,</if>
+            <if test="workCode != null">work_code,</if>
+            <if test="porderCode != null">porder_code,</if>
+            <if test="porderName != null">porder_name,</if>
+            <if test="cpfpParentid != null">cpfp_parentid,</if>
+            <if test="submitTime != null">submit_time,</if>
+            <if test="workStatus != null">work_status,</if>
+            <if test="thisProcess != null">this_process,</if>
+            <if test="nextProcess != null">next_process,</if>
+            <if test="startTime != null">start_time,</if>
+            <if test="endTime != null">end_time,</if>
+            <if test="brand != null">brand,</if>
+            <if test="batchNumber != null">batch_number,</if>
+            <if test="plannedOrdersCode != null">planned_orders_code,</if>
+            <if test="demandTime != null">demand_time,</if>
+            <if test="itemId != null">item_id,</if>
+            <if test="itemCode != null">item_code,</if>
+            <if test="itemName != null">item_name,</if>
+            <if test="unit != null">unit,</if>
+            <if test="clientId != null">client_id,</if>
+            <if test="clientCode != null">client_code,</if>
+            <if test="clientName != null">client_name,</if>
+            <if test="performanceReq != null">performance_req,</if>
+            <if test="qualityReq != null">quality_req,</if>
+            <if test="packageReq != null">package_req,</if>
+            <if test="remark != null">remark,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="scgdmxId != null">#{scgdmxId},</if>
+            <if test="workCode != null">#{workCode},</if>
+            <if test="porderCode != null">#{porderCode},</if>
+            <if test="porderName != null">#{porderName},</if>
+            <if test="cpfpParentid != null">#{cpfpParentid},</if>
+            <if test="submitTime != null">#{submitTime},</if>
+            <if test="workStatus != null">#{workStatus},</if>
+            <if test="thisProcess != null">#{thisProcess},</if>
+            <if test="nextProcess != null">#{nextProcess},</if>
+            <if test="startTime != null">#{startTime},</if>
+            <if test="endTime != null">#{endTime},</if>
+            <if test="brand != null">#{brand},</if>
+            <if test="batchNumber != null">#{batchNumber},</if>
+            <if test="plannedOrdersCode != null">#{plannedOrdersCode},</if>
+            <if test="demandTime != null">#{demandTime},</if>
+            <if test="itemId != null">#{itemId},</if>
+            <if test="itemCode != null">#{itemCode},</if>
+            <if test="itemName != null">#{itemName},</if>
+            <if test="unit != null">#{unit},</if>
+            <if test="clientId != null">#{clientId},</if>
+            <if test="clientCode != null">#{clientCode},</if>
+            <if test="clientName != null">#{clientName},</if>
+            <if test="performanceReq != null">#{performanceReq},</if>
+            <if test="qualityReq != null">#{qualityReq},</if>
+            <if test="packageReq != null">#{packageReq},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCysScgdmx" parameterType="CysScgdmx">
+        update cys_scgdmx
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="scgdmxId != null">scgdmx_id = #{scgdmxId},</if>
+            <if test="workCode != null">work_code = #{workCode},</if>
+            <if test="porderCode != null">porder_code = #{porderCode},</if>
+            <if test="porderName != null">porder_name = #{porderName},</if>
+            <if test="cpfpParentid != null">cpfp_parentid = #{cpfpParentid},</if>
+            <if test="submitTime != null">submit_time = #{submitTime},</if>
+            <if test="workStatus != null">work_status = #{workStatus},</if>
+            <if test="thisProcess != null">this_process = #{thisProcess},</if>
+            <if test="nextProcess != null">next_process = #{nextProcess},</if>
+            <if test="startTime != null">start_time = #{startTime},</if>
+            <if test="endTime != null">end_time = #{endTime},</if>
+            <if test="brand != null">brand = #{brand},</if>
+            <if test="batchNumber != null">batch_number = #{batchNumber},</if>
+            <if test="plannedOrdersCode != null">planned_orders_code = #{plannedOrdersCode},</if>
+            <if test="demandTime != null">demand_time = #{demandTime},</if>
+            <if test="itemId != null">item_id = #{itemId},</if>
+            <if test="itemCode != null">item_code = #{itemCode},</if>
+            <if test="itemName != null">item_name = #{itemName},</if>
+            <if test="unit != null">unit = #{unit},</if>
+            <if test="clientId != null">client_id = #{clientId},</if>
+            <if test="clientCode != null">client_code = #{clientCode},</if>
+            <if test="clientName != null">client_name = #{clientName},</if>
+            <if test="performanceReq != null">performance_req = #{performanceReq},</if>
+            <if test="qualityReq != null">quality_req = #{qualityReq},</if>
+            <if test="packageReq != null">package_req = #{packageReq},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where scgdmx_id = #{scgdmxId}
+    </update>
+
+    <delete id="deleteCysScgdmxByWorkId" parameterType="Long">
+        delete from cys_scgdmx where scgdmx_id = #{scgdmxId}
+    </delete>
+
+    <delete id="deleteCysScgdmxByWorkIds" parameterType="String">
+        delete from cys_scgdmx where scgdmx_id in
+        <foreach item="scgdmxId" collection="array" open="(" separator="," close=")">
+            #{scgdmxId}
+        </foreach>
+    </delete>
+</mapper>

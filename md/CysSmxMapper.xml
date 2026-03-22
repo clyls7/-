@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huaan.mes.md.mapper.CysSmxMapper">
+    
+    <resultMap type="CysSmx" id="CysSmxResult">
+        <result property="doublesidedId"    column="doublesided_id"    />
+        <result property="dsmCode"    column="dsm_code"    />
+        <result property="workorderId"    column="workorder_id"    />
+        <result property="workorderCode"    column="workorder_code"    />
+        <result property="brand"    column="brand"    />
+        <result property="batchNumber"    column="batch_number"    />
+        <result property="millingCount"    column="milling_count"    />
+        <result property="spBeforeMilling"    column="sp_before_milling"    />
+        <result property="spAfterMilling"    column="sp_after_milling"    />
+        <result property="spBeforeWeight"    column="sp_before_weight"    />
+        <result property="spAfterWeight"    column="sp_after_weight"    />
+        <result property="millingTime"    column="milling_time"    />
+        <result property="userId"    column="user_id"    />
+        <result property="userName"    column="user_name"    />
+        <result property="qualityJudgment"    column="quality_judgment"    />
+        <result property="abnormalCause"    column="abnormal_cause"    />
+        <result property="remark"    column="remark"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectCysSmxVo">
+        select doublesided_id, dsm_code, workorder_id, workorder_code, brand, batch_number, milling_count, sp_before_milling, sp_after_milling, sp_before_weight, sp_after_weight, milling_time, user_id, user_name, quality_judgment, abnormal_cause, remark, create_by, create_time, update_by, update_time from cys_smx
+    </sql>
+
+    <select id="selectCysSmxList" parameterType="CysSmx" resultMap="CysSmxResult">
+        <include refid="selectCysSmxVo"/>
+        <where>  
+            <if test="dsmCode != null  and dsmCode != ''"> and dsm_code = #{dsmCode}</if>
+            <if test="workorderId != null "> and workorder_id = #{workorderId}</if>
+            <if test="workorderCode != null  and workorderCode != ''"> and workorder_code = #{workorderCode}</if>
+            <if test="brand != null  and brand != ''"> and brand = #{brand}</if>
+            <if test="batchNumber != null  and batchNumber != ''"> and batch_number = #{batchNumber}</if>
+            <if test="millingCount != null "> and milling_count = #{millingCount}</if>
+            <if test="spBeforeMilling != null "> and sp_before_milling = #{spBeforeMilling}</if>
+            <if test="spAfterMilling != null "> and sp_after_milling = #{spAfterMilling}</if>
+            <if test="spBeforeWeight != null "> and sp_before_weight = #{spBeforeWeight}</if>
+            <if test="spAfterWeight != null "> and sp_after_weight = #{spAfterWeight}</if>
+            <if test="millingTime != null "> and milling_time = #{millingTime}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="qualityJudgment != null  and qualityJudgment != ''"> and quality_judgment = #{qualityJudgment}</if>
+            <if test="abnormalCause != null  and abnormalCause != ''"> and abnormal_cause = #{abnormalCause}</if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
+    
+    <select id="selectCysSmxByDoublesidedId" parameterType="String" resultMap="CysSmxResult">
+        <include refid="selectCysSmxVo"/>
+        where doublesided_id = #{doublesidedId}
+    </select>
+        
+    <insert id="insertCysSmx" parameterType="CysSmx" useGeneratedKeys="true" keyProperty="doublesidedId">
+        insert into cys_smx
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dsmCode != null">dsm_code,</if>
+            <if test="workorderId != null">workorder_id,</if>
+            <if test="workorderCode != null">workorder_code,</if>
+            <if test="brand != null">brand,</if>
+            <if test="batchNumber != null">batch_number,</if>
+            <if test="millingCount != null">milling_count,</if>
+            <if test="spBeforeMilling != null">sp_before_milling,</if>
+            <if test="spAfterMilling != null">sp_after_milling,</if>
+            <if test="spBeforeWeight != null">sp_before_weight,</if>
+            <if test="spAfterWeight != null">sp_after_weight,</if>
+            <if test="millingTime != null">milling_time,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="userName != null">user_name,</if>
+            <if test="qualityJudgment != null">quality_judgment,</if>
+            <if test="abnormalCause != null">abnormal_cause,</if>
+            <if test="remark != null">remark,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dsmCode != null">#{dsmCode},</if>
+            <if test="workorderId != null">#{workorderId},</if>
+            <if test="workorderCode != null">#{workorderCode},</if>
+            <if test="brand != null">#{brand},</if>
+            <if test="batchNumber != null">#{batchNumber},</if>
+            <if test="millingCount != null">#{millingCount},</if>
+            <if test="spBeforeMilling != null">#{spBeforeMilling},</if>
+            <if test="spAfterMilling != null">#{spAfterMilling},</if>
+            <if test="spBeforeWeight != null">#{spBeforeWeight},</if>
+            <if test="spAfterWeight != null">#{spAfterWeight},</if>
+            <if test="millingTime != null">#{millingTime},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="userName != null">#{userName},</if>
+            <if test="qualityJudgment != null">#{qualityJudgment},</if>
+            <if test="abnormalCause != null">#{abnormalCause},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCysSmx" parameterType="CysSmx">
+        update cys_smx
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="dsmCode != null">dsm_code = #{dsmCode},</if>
+            <if test="workorderId != null">workorder_id = #{workorderId},</if>
+            <if test="workorderCode != null">workorder_code = #{workorderCode},</if>
+            <if test="brand != null">brand = #{brand},</if>
+            <if test="batchNumber != null">batch_number = #{batchNumber},</if>
+            <if test="millingCount != null">milling_count = #{millingCount},</if>
+            <if test="spBeforeMilling != null">sp_before_milling = #{spBeforeMilling},</if>
+            <if test="spAfterMilling != null">sp_after_milling = #{spAfterMilling},</if>
+            <if test="spBeforeWeight != null">sp_before_weight = #{spBeforeWeight},</if>
+            <if test="spAfterWeight != null">sp_after_weight = #{spAfterWeight},</if>
+            <if test="millingTime != null">milling_time = #{millingTime},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="qualityJudgment != null">quality_judgment = #{qualityJudgment},</if>
+            <if test="abnormalCause != null">abnormal_cause = #{abnormalCause},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where doublesided_id = #{doublesidedId}
+    </update>
+
+    <delete id="deleteCysSmxByDoublesidedId" parameterType="String">
+        delete from cys_smx where doublesided_id = #{doublesidedId}
+    </delete>
+
+    <delete id="deleteCysSmxByDoublesidedIds" parameterType="String">
+        delete from cys_smx where doublesided_id in 
+        <foreach item="doublesidedId" collection="array" open="(" separator="," close=")">
+            #{doublesidedId}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huaan.mes.md.mapper.CysCbfxMapper">
+    
+    <resultMap type="CysCbfx" id="CysCbfxResult">
+        <result property="costaId"    column="costa_id"    />
+        <result property="costaCode"    column="costa_code"    />
+        <result property="workorderId"    column="workorder_id"    />
+        <result property="workorderCode"    column="workorder_code"    />
+        <result property="brand"    column="brand"    />
+        <result property="batchNumber"    column="batch_number"    />
+        <result property="grade"    column="grade"    />
+        <result property="testingTime"    column="testing_time"    />
+        <result property="cu"    column="cu"    />
+        <result property="fe"    column="fe"    />
+        <result property="pb"    column="pb"    />
+        <result property="ai"    column="ai"    />
+        <result property="cd"    column="cd"    />
+        <result property="sn"    column="sn"    />
+        <result property="technicianId"    column="technician_id"    />
+        <result property="technicianName"    column="technician_name"    />
+        <result property="qualityJudgment"    column="quality_judgment"    />
+        <result property="abnormalCause"    column="abnormal_cause"    />
+        <result property="remark"    column="remark"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectCysCbfxVo">
+        select costa_id, costa_code, workorder_id, workorder_code, brand, batch_number, grade, testing_time, cu, fe, pb, ai, cd, sn, technician_id, technician_name, quality_judgment, abnormal_cause, remark, create_by, create_time, update_by, update_time from cys_cbfx
+    </sql>
+
+    <select id="selectCysCbfxList" parameterType="CysCbfx" resultMap="CysCbfxResult">
+        <include refid="selectCysCbfxVo"/>
+        <where>  
+            <if test="costaCode != null  and costaCode != ''"> and costa_code = #{costaCode}</if>
+            <if test="workorderId != null "> and workorder_id = #{workorderId}</if>
+            <if test="workorderCode != null  and workorderCode != ''"> and workorder_code = #{workorderCode}</if>
+            <if test="brand != null  and brand != ''"> and brand = #{brand}</if>
+            <if test="batchNumber != null  and batchNumber != ''"> and batch_number = #{batchNumber}</if>
+            <if test="grade != null  and grade != ''"> and grade = #{grade}</if>
+            <if test="testingTime != null "> and testing_time = #{testingTime}</if>
+            <if test="cu != null "> and cu = #{cu}</if>
+            <if test="fe != null "> and fe = #{fe}</if>
+            <if test="pb != null "> and pb = #{pb}</if>
+            <if test="ai != null "> and ai = #{ai}</if>
+            <if test="cd != null "> and cd = #{cd}</if>
+            <if test="sn != null "> and sn = #{sn}</if>
+            <if test="technicianId != null "> and technician_id = #{technicianId}</if>
+            <if test="technicianName != null  and technicianName != ''"> and technician_name like concat('%', #{technicianName}, '%')</if>
+            <if test="qualityJudgment != null  and qualityJudgment != ''"> and quality_judgment = #{qualityJudgment}</if>
+            <if test="abnormalCause != null  and abnormalCause != ''"> and abnormal_cause = #{abnormalCause}</if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
+    
+    <select id="selectCysCbfxByCostaId" parameterType="Long" resultMap="CysCbfxResult">
+        <include refid="selectCysCbfxVo"/>
+        where costa_id = #{costaId}
+    </select>
+        
+    <insert id="insertCysCbfx" parameterType="CysCbfx" useGeneratedKeys="true" keyProperty="costaId">
+        insert into cys_cbfx
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="costaCode != null">costa_code,</if>
+            <if test="workorderId != null">workorder_id,</if>
+            <if test="workorderCode != null">workorder_code,</if>
+            <if test="brand != null">brand,</if>
+            <if test="batchNumber != null">batch_number,</if>
+            <if test="grade != null">grade,</if>
+            <if test="testingTime != null">testing_time,</if>
+            <if test="cu != null">cu,</if>
+            <if test="fe != null">fe,</if>
+            <if test="pb != null">pb,</if>
+            <if test="ai != null">ai,</if>
+            <if test="cd != null">cd,</if>
+            <if test="sn != null">sn,</if>
+            <if test="technicianId != null">technician_id,</if>
+            <if test="technicianName != null">technician_name,</if>
+            <if test="qualityJudgment != null">quality_judgment,</if>
+            <if test="abnormalCause != null">abnormal_cause,</if>
+            <if test="remark != null">remark,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="costaCode != null">#{costaCode},</if>
+            <if test="workorderId != null">#{workorderId},</if>
+            <if test="workorderCode != null">#{workorderCode},</if>
+            <if test="brand != null">#{brand},</if>
+            <if test="batchNumber != null">#{batchNumber},</if>
+            <if test="grade != null">#{grade},</if>
+            <if test="testingTime != null">#{testingTime},</if>
+            <if test="cu != null">#{cu},</if>
+            <if test="fe != null">#{fe},</if>
+            <if test="pb != null">#{pb},</if>
+            <if test="ai != null">#{ai},</if>
+            <if test="cd != null">#{cd},</if>
+            <if test="sn != null">#{sn},</if>
+            <if test="technicianId != null">#{technicianId},</if>
+            <if test="technicianName != null">#{technicianName},</if>
+            <if test="qualityJudgment != null">#{qualityJudgment},</if>
+            <if test="abnormalCause != null">#{abnormalCause},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCysCbfx" parameterType="CysCbfx">
+        update cys_cbfx
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="costaCode != null">costa_code = #{costaCode},</if>
+            <if test="workorderId != null">workorder_id = #{workorderId},</if>
+            <if test="workorderCode != null">workorder_code = #{workorderCode},</if>
+            <if test="brand != null">brand = #{brand},</if>
+            <if test="batchNumber != null">batch_number = #{batchNumber},</if>
+            <if test="grade != null">grade = #{grade},</if>
+            <if test="testingTime != null">testing_time = #{testingTime},</if>
+            <if test="cu != null">cu = #{cu},</if>
+            <if test="fe != null">fe = #{fe},</if>
+            <if test="pb != null">pb = #{pb},</if>
+            <if test="ai != null">ai = #{ai},</if>
+            <if test="cd != null">cd = #{cd},</if>
+            <if test="sn != null">sn = #{sn},</if>
+            <if test="technicianId != null">technician_id = #{technicianId},</if>
+            <if test="technicianName != null">technician_name = #{technicianName},</if>
+            <if test="qualityJudgment != null">quality_judgment = #{qualityJudgment},</if>
+            <if test="abnormalCause != null">abnormal_cause = #{abnormalCause},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where costa_id = #{costaId}
+    </update>
+
+    <delete id="deleteCysCbfxByCostaId" parameterType="Long">
+        delete from cys_cbfx where costa_id = #{costaId}
+    </delete>
+
+    <delete id="deleteCysCbfxByCostaIds" parameterType="String">
+        delete from cys_cbfx where costa_id in 
+        <foreach item="costaId" collection="array" open="(" separator="," close=")">
+            #{costaId}
+        </foreach>
+    </delete>
+</mapper>

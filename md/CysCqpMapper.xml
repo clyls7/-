@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huaan.mes.md.mapper.CysCqpMapper">
+    
+    <resultMap type="CysCqp" id="CysCqpResult">
+        <result property="roughcutId"    column="roughcut_id"    />
+        <result property="roughcutCode"    column="roughcut_code"    />
+        <result property="workorderId"    column="workorder_id"    />
+        <result property="workorderCode"    column="workorder_code"    />
+        <result property="brand"    column="brand"    />
+        <result property="batchNumber"    column="batch_number"    />
+        <result property="deviceName"    column="device_name"    />
+        <result property="cutBeforeMilling"    column="cut_before_milling"    />
+        <result property="cutAfterMilling"    column="cut_after_milling"    />
+        <result property="cutBeforeWeight"    column="cut_before_weight"    />
+        <result property="cutAfterWeight"    column="cut_after_weight"    />
+        <result property="cutTime"    column="cut_time"    />
+        <result property="userId"    column="user_id"    />
+        <result property="userName"    column="user_name"    />
+        <result property="qualityJudgment"    column="quality_judgment"    />
+        <result property="abnormalCause"    column="abnormal_cause"    />
+        <result property="remark"    column="remark"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectCysCqpVo">
+        select roughcut_id, roughcut_code, workorder_id, workorder_code, brand, batch_number, device_name, cut_before_milling, cut_after_milling, cut_before_weight, cut_after_weight, cut_time, user_id, user_name, quality_judgment, abnormal_cause, remark, create_by, create_time, update_by, update_time from cys_cqp
+    </sql>
+
+    <select id="selectCysCqpList" parameterType="CysCqp" resultMap="CysCqpResult">
+        <include refid="selectCysCqpVo"/>
+        <where>  
+            <if test="roughcutCode != null  and roughcutCode != ''"> and roughcut_code = #{roughcutCode}</if>
+            <if test="workorderId != null "> and workorder_id = #{workorderId}</if>
+            <if test="workorderCode != null  and workorderCode != ''"> and workorder_code = #{workorderCode}</if>
+            <if test="brand != null  and brand != ''"> and brand = #{brand}</if>
+            <if test="batchNumber != null  and batchNumber != ''"> and batch_number = #{batchNumber}</if>
+            <if test="deviceName != null  and deviceName != ''"> and device_name like concat('%', #{deviceName}, '%')</if>
+            <if test="cutBeforeMilling != null "> and cut_before_milling = #{cutBeforeMilling}</if>
+            <if test="cutAfterMilling != null "> and cut_after_milling = #{cutAfterMilling}</if>
+            <if test="cutBeforeWeight != null "> and cut_before_weight = #{cutBeforeWeight}</if>
+            <if test="cutAfterWeight != null "> and cut_after_weight = #{cutAfterWeight}</if>
+            <if test="cutTime != null "> and cut_time = #{cutTime}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="qualityJudgment != null  and qualityJudgment != ''"> and quality_judgment = #{qualityJudgment}</if>
+            <if test="abnormalCause != null  and abnormalCause != ''"> and abnormal_cause = #{abnormalCause}</if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
+    
+    <select id="selectCysCqpByRoughcutId" parameterType="String" resultMap="CysCqpResult">
+        <include refid="selectCysCqpVo"/>
+        where roughcut_id = #{roughcutId}
+    </select>
+        
+    <insert id="insertCysCqp" parameterType="CysCqp" useGeneratedKeys="true" keyProperty="roughcutId">
+        insert into cys_cqp
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roughcutCode != null">roughcut_code,</if>
+            <if test="workorderId != null">workorder_id,</if>
+            <if test="workorderCode != null">workorder_code,</if>
+            <if test="brand != null">brand,</if>
+            <if test="batchNumber != null">batch_number,</if>
+            <if test="deviceName != null">device_name,</if>
+            <if test="cutBeforeMilling != null">cut_before_milling,</if>
+            <if test="cutAfterMilling != null">cut_after_milling,</if>
+            <if test="cutBeforeWeight != null">cut_before_weight,</if>
+            <if test="cutAfterWeight != null">cut_after_weight,</if>
+            <if test="cutTime != null">cut_time,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="userName != null">user_name,</if>
+            <if test="qualityJudgment != null">quality_judgment,</if>
+            <if test="abnormalCause != null">abnormal_cause,</if>
+            <if test="remark != null">remark,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="roughcutCode != null">#{roughcutCode},</if>
+            <if test="workorderId != null">#{workorderId},</if>
+            <if test="workorderCode != null">#{workorderCode},</if>
+            <if test="brand != null">#{brand},</if>
+            <if test="batchNumber != null">#{batchNumber},</if>
+            <if test="deviceName != null">#{deviceName},</if>
+            <if test="cutBeforeMilling != null">#{cutBeforeMilling},</if>
+            <if test="cutAfterMilling != null">#{cutAfterMilling},</if>
+            <if test="cutBeforeWeight != null">#{cutBeforeWeight},</if>
+            <if test="cutAfterWeight != null">#{cutAfterWeight},</if>
+            <if test="cutTime != null">#{cutTime},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="userName != null">#{userName},</if>
+            <if test="qualityJudgment != null">#{qualityJudgment},</if>
+            <if test="abnormalCause != null">#{abnormalCause},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCysCqp" parameterType="CysCqp">
+        update cys_cqp
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="roughcutCode != null">roughcut_code = #{roughcutCode},</if>
+            <if test="workorderId != null">workorder_id = #{workorderId},</if>
+            <if test="workorderCode != null">workorder_code = #{workorderCode},</if>
+            <if test="brand != null">brand = #{brand},</if>
+            <if test="batchNumber != null">batch_number = #{batchNumber},</if>
+            <if test="deviceName != null">device_name = #{deviceName},</if>
+            <if test="cutBeforeMilling != null">cut_before_milling = #{cutBeforeMilling},</if>
+            <if test="cutAfterMilling != null">cut_after_milling = #{cutAfterMilling},</if>
+            <if test="cutBeforeWeight != null">cut_before_weight = #{cutBeforeWeight},</if>
+            <if test="cutAfterWeight != null">cut_after_weight = #{cutAfterWeight},</if>
+            <if test="cutTime != null">cut_time = #{cutTime},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="qualityJudgment != null">quality_judgment = #{qualityJudgment},</if>
+            <if test="abnormalCause != null">abnormal_cause = #{abnormalCause},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where roughcut_id = #{roughcutId}
+    </update>
+
+    <delete id="deleteCysCqpByRoughcutId" parameterType="String">
+        delete from cys_cqp where roughcut_id = #{roughcutId}
+    </delete>
+
+    <delete id="deleteCysCqpByRoughcutIds" parameterType="String">
+        delete from cys_cqp where roughcut_id in 
+        <foreach item="roughcutId" collection="array" open="(" separator="," close=")">
+            #{roughcutId}
+        </foreach>
+    </delete>
+</mapper>

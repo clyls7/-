@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huaan.mes.md.mapper.CysRzMapper">
+    
+    <resultMap type="CysRz" id="CysRzResult">
+        <result property="casId"    column="cas_id"    />
+        <result property="castingCode"    column="casting_code"    />
+        <result property="workorderId"    column="workorder_id"    />
+        <result property="workorderCode"    column="workorder_code"    />
+        <result property="brand"    column="brand"    />
+        <result property="usercode"    column="userCode"    />
+        <result property="castingData"    column="casting_data"    />
+        <result property="furnaceNo"    column="furnace_no"    />
+        <result property="furnaceHeat"    column="furnace_heat"    />
+        <result property="userId"    column="user_id"    />
+        <result property="userName"    column="user_name"    />
+        <result property="grade"    column="grade"    />
+        <result property="batchNumber"    column="batch_number"    />
+        <result property="brassScrap"    column="brass_scrap"    />
+        <result property="copper"    column="copper"    />
+        <result property="zincBlock"    column="zinc_block"    />
+        <result property="whitePlating"    column="white_plating"    />
+        <result property="electrolyticCopper"    column="electrolytic_copper"    />
+        <result property="weight"    column="weight"    />
+        <result property="ingotSpecifications"    column="Ingot_specifications"    />
+        <result property="testingTime"    column="testing_time"    />
+        <result property="cu"    column="cu"    />
+        <result property="fe"    column="fe"    />
+        <result property="pb"    column="pb"    />
+        <result property="ai"    column="ai"    />
+        <result property="cd"    column="cd"    />
+        <result property="sn"    column="sn"    />
+        <result property="technicianId"    column="technician_id"    />
+        <result property="technicianName"    column="technician_name"    />
+        <result property="beforeSawing"    column="before_sawing"    />
+        <result property="afterSawing"    column="after_sawing"    />
+        <result property="qualityJudgment"    column="quality_judgment"    />
+        <result property="abnormalCause"    column="abnormal_cause"    />
+        <result property="status"    column="status"    />
+        <result property="remark"    column="remark"    />
+        <result property="sourceRz"    column="source_rz"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectCysRzVo">
+        select cas_id, casting_code, workorder_id, workorder_code, brand, userCode, casting_data, furnace_no, furnace_heat, user_id, user_name, grade, batch_number, brass_scrap, copper, zinc_block, white_plating, electrolytic_copper, weight, Ingot_specifications, testing_time, cu, fe, pb, ai, cd, sn, technician_id, technician_name, before_sawing, after_sawing, quality_judgment, abnormal_cause, status, remark,source_rz, create_by, create_time, update_by, update_time from cys_rz
+    </sql>
+
+    <select id="selectCysRzList" parameterType="CysRz" resultMap="CysRzResult">
+        <include refid="selectCysRzVo"/>
+        <where>  
+            <if test="castingCode != null  and castingCode != ''"> and casting_code = #{castingCode}</if>
+            <if test="workorderId != null "> and workorder_id = #{workorderId}</if>
+            <if test="workorderCode != null  and workorderCode != ''"> and workorder_code = #{workorderCode}</if>
+            <if test="brand != null  and brand != ''"> and brand = #{brand}</if>
+            <if test="usercode != null  and usercode != ''"> and userCode = #{usercode}</if>
+            <if test="castingData != null "> and casting_data = #{castingData}</if>
+            <if test="furnaceNo != null  and furnaceNo != ''"> and furnace_no = #{furnaceNo}</if>
+            <if test="furnaceHeat != null  and furnaceHeat != ''"> and furnace_heat = #{furnaceHeat}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="grade != null  and grade != ''"> and grade = #{grade}</if>
+            <if test="batchNumber != null  and batchNumber != ''"> and batch_number = #{batchNumber}</if>
+            <if test="brassScrap != null "> and brass_scrap = #{brassScrap}</if>
+            <if test="copper != null "> and copper = #{copper}</if>
+            <if test="zincBlock != null "> and zinc_block = #{zincBlock}</if>
+            <if test="whitePlating != null "> and white_plating = #{whitePlating}</if>
+            <if test="electrolyticCopper != null "> and electrolytic_copper = #{electrolyticCopper}</if>
+            <if test="weight != null "> and weight = #{weight}</if>
+            <if test="ingotSpecifications != null  and ingotSpecifications != ''"> and Ingot_specifications = #{ingotSpecifications}</if>
+            <if test="testingTime != null "> and testing_time = #{testingTime}</if>
+            <if test="cu != null "> and cu = #{cu}</if>
+            <if test="fe != null "> and fe = #{fe}</if>
+            <if test="pb != null "> and pb = #{pb}</if>
+            <if test="ai != null "> and ai = #{ai}</if>
+            <if test="cd != null "> and cd = #{cd}</if>
+            <if test="sn != null "> and sn = #{sn}</if>
+            <if test="technicianId != null "> and technician_id = #{technicianId}</if>
+            <if test="technicianName != null  and technicianName != ''"> and technician_name like concat('%', #{technicianName}, '%')</if>
+            <if test="beforeSawing != null "> and before_sawing = #{beforeSawing}</if>
+            <if test="afterSawing != null "> and after_sawing = #{afterSawing}</if>
+            <if test="qualityJudgment != null  and qualityJudgment != ''"> and quality_judgment = #{qualityJudgment}</if>
+            <if test="abnormalCause != null  and abnormalCause != ''"> and abnormal_cause = #{abnormalCause}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="sourceRz != null  and sourceRz != ''"> and source_rz = #{sourceRz}</if>
+        </where>
+        order by create_time desc
+    </select>
+    
+    <select id="selectCysRzByCasId" parameterType="String" resultMap="CysRzResult">
+        <include refid="selectCysRzVo"/>
+        where cas_id = #{casId}
+    </select>
+        
+    <insert id="insertCysRz" parameterType="CysRz" useGeneratedKeys="true" keyProperty="casId">
+        insert into cys_rz
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="castingCode != null">casting_code,</if>
+            <if test="workorderId != null">workorder_id,</if>
+            <if test="workorderCode != null">workorder_code,</if>
+            <if test="brand != null">brand,</if>
+            <if test="usercode != null">userCode,</if>
+            <if test="castingData != null">casting_data,</if>
+            <if test="furnaceNo != null">furnace_no,</if>
+            <if test="furnaceHeat != null">furnace_heat,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="userName != null">user_name,</if>
+            <if test="grade != null">grade,</if>
+            <if test="batchNumber != null">batch_number,</if>
+            <if test="brassScrap != null">brass_scrap,</if>
+            <if test="copper != null">copper,</if>
+            <if test="zincBlock != null">zinc_block,</if>
+            <if test="whitePlating != null">white_plating,</if>
+            <if test="electrolyticCopper != null">electrolytic_copper,</if>
+            <if test="weight != null">weight,</if>
+            <if test="ingotSpecifications != null">Ingot_specifications,</if>
+            <if test="testingTime != null">testing_time,</if>
+            <if test="cu != null">cu,</if>
+            <if test="fe != null">fe,</if>
+            <if test="pb != null">pb,</if>
+            <if test="ai != null">ai,</if>
+            <if test="cd != null">cd,</if>
+            <if test="sn != null">sn,</if>
+            <if test="technicianId != null">technician_id,</if>
+            <if test="technicianName != null">technician_name,</if>
+            <if test="beforeSawing != null">before_sawing,</if>
+            <if test="afterSawing != null">after_sawing,</if>
+            <if test="qualityJudgment != null">quality_judgment,</if>
+            <if test="abnormalCause != null">abnormal_cause,</if>
+            <if test="status != null">status,</if>
+            <if test="remark != null">remark,</if>
+            <if test="sourceRz != null">source_rz,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="castingCode != null">#{castingCode},</if>
+            <if test="workorderId != null">#{workorderId},</if>
+            <if test="workorderCode != null">#{workorderCode},</if>
+            <if test="brand != null">#{brand},</if>
+            <if test="usercode != null">#{usercode},</if>
+            <if test="castingData != null">#{castingData},</if>
+            <if test="furnaceNo != null">#{furnaceNo},</if>
+            <if test="furnaceHeat != null">#{furnaceHeat},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="userName != null">#{userName},</if>
+            <if test="grade != null">#{grade},</if>
+            <if test="batchNumber != null">#{batchNumber},</if>
+            <if test="brassScrap != null">#{brassScrap},</if>
+            <if test="copper != null">#{copper},</if>
+            <if test="zincBlock != null">#{zincBlock},</if>
+            <if test="whitePlating != null">#{whitePlating},</if>
+            <if test="electrolyticCopper != null">#{electrolyticCopper},</if>
+            <if test="weight != null">#{weight},</if>
+            <if test="ingotSpecifications != null">#{ingotSpecifications},</if>
+            <if test="testingTime != null">#{testingTime},</if>
+            <if test="cu != null">#{cu},</if>
+            <if test="fe != null">#{fe},</if>
+            <if test="pb != null">#{pb},</if>
+            <if test="ai != null">#{ai},</if>
+            <if test="cd != null">#{cd},</if>
+            <if test="sn != null">#{sn},</if>
+            <if test="technicianId != null">#{technicianId},</if>
+            <if test="technicianName != null">#{technicianName},</if>
+            <if test="beforeSawing != null">#{beforeSawing},</if>
+            <if test="afterSawing != null">#{afterSawing},</if>
+            <if test="qualityJudgment != null">#{qualityJudgment},</if>
+            <if test="abnormalCause != null">#{abnormalCause},</if>
+            <if test="status != null">#{status},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="sourceRz != null">#{sourceRz},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCysRz" parameterType="CysRz">
+        update cys_rz
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="castingCode != null">casting_code = #{castingCode},</if>
+            <if test="workorderId != null">workorder_id = #{workorderId},</if>
+            <if test="workorderCode != null">workorder_code = #{workorderCode},</if>
+            <if test="brand != null">brand = #{brand},</if>
+            <if test="usercode != null">userCode = #{usercode},</if>
+            <if test="castingData != null">casting_data = #{castingData},</if>
+            <if test="furnaceNo != null">furnace_no = #{furnaceNo},</if>
+            <if test="furnaceHeat != null">furnace_heat = #{furnaceHeat},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="grade != null">grade = #{grade},</if>
+            <if test="batchNumber != null">batch_number = #{batchNumber},</if>
+            <if test="brassScrap != null">brass_scrap = #{brassScrap},</if>
+            <if test="copper != null">copper = #{copper},</if>
+            <if test="zincBlock != null">zinc_block = #{zincBlock},</if>
+            <if test="whitePlating != null">white_plating = #{whitePlating},</if>
+            <if test="electrolyticCopper != null">electrolytic_copper = #{electrolyticCopper},</if>
+            <if test="weight != null">weight = #{weight},</if>
+            <if test="ingotSpecifications != null">Ingot_specifications = #{ingotSpecifications},</if>
+            <if test="testingTime != null">testing_time = #{testingTime},</if>
+            <if test="cu != null">cu = #{cu},</if>
+            <if test="fe != null">fe = #{fe},</if>
+            <if test="pb != null">pb = #{pb},</if>
+            <if test="ai != null">ai = #{ai},</if>
+            <if test="cd != null">cd = #{cd},</if>
+            <if test="sn != null">sn = #{sn},</if>
+            <if test="technicianId != null">technician_id = #{technicianId},</if>
+            <if test="technicianName != null">technician_name = #{technicianName},</if>
+            <if test="beforeSawing != null">before_sawing = #{beforeSawing},</if>
+            <if test="afterSawing != null">after_sawing = #{afterSawing},</if>
+            <if test="qualityJudgment != null">quality_judgment = #{qualityJudgment},</if>
+            <if test="abnormalCause != null">abnormal_cause = #{abnormalCause},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="sourceRz != null">source_rz = #{sourceRz},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where cas_id = #{casId}
+    </update>
+
+    <delete id="deleteCysRzByCasId" parameterType="String">
+        delete from cys_rz where cas_id = #{casId}
+    </delete>
+
+    <delete id="deleteCysRzByCasIds" parameterType="String">
+        delete from cys_rz where cas_id in 
+        <foreach item="casId" collection="array" open="(" separator="," close=")">
+            #{casId}
+        </foreach>
+    </delete>
+</mapper>

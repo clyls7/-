@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huaan.mes.md.mapper.CysFqmxMapper">
+    
+    <resultMap type="CysFqmx" id="CysFqmxResult">
+        <result property="fqmxId"    column="fqmx_id"    />
+        <result property="fqmxCode"    column="fqmx_code"    />
+        <result property="workorderId"    column="workorder_id"    />
+        <result property="workorderCode"    column="workorder_code"    />
+        <result property="brand"    column="brand"    />
+        <result property="batchNumber"    column="batch_number"    />
+        <result property="cuttingParentid"    column="cutting_parentid"    />
+        <result property="width"    column="width"    />
+        <result property="weight"    column="weight"    />
+        <result property="materialCode"    column="material_code"    />
+        <result property="materialName"    column="material_name"    />
+        <result property="userName"    column="user_name"    />
+        <result property="remark"    column="remark"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectCysFqmxVo">
+        select fqmx_id, fqmx_code, workorder_id, workorder_code, brand, batch_number, cutting_parentid, width, weight, material_code, material_name, user_name, remark, create_by, create_time, update_by, update_time from cys_fqmx
+    </sql>
+
+    <select id="selectCysFqmxList" parameterType="CysFqmx" resultMap="CysFqmxResult">
+        <include refid="selectCysFqmxVo"/>
+        <where>  
+            <if test="fqmxCode != null  and fqmxCode != ''"> and fqmx_code = #{fqmxCode}</if>
+            <if test="workorderId != null "> and workorder_id = #{workorderId}</if>
+            <if test="workorderCode != null  and workorderCode != ''"> and workorder_code = #{workorderCode}</if>
+            <if test="brand != null  and brand != ''"> and brand = #{brand}</if>
+            <if test="batchNumber != null  and batchNumber != ''"> and batch_number = #{batchNumber}</if>
+            <if test="cuttingParentid != null "> and cutting_parentid = #{cuttingParentid}</if>
+            <if test="width != null "> and width = #{width}</if>
+            <if test="weight != null "> and weight = #{weight}</if>
+            <if test="materialCode != null  and materialCode != ''"> and material_code = #{materialCode}</if>
+            <if test="materialName != null  and materialName != ''"> and material_name like concat('%', #{materialName}, '%')</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCysFqmxByFqmxId" parameterType="String" resultMap="CysFqmxResult">
+        <include refid="selectCysFqmxVo"/>
+        where fqmx_id = #{fqmxId}
+    </select>
+        
+    <insert id="insertCysFqmx" parameterType="CysFqmx" useGeneratedKeys="true" keyProperty="fqmxId">
+        insert into cys_fqmx
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fqmxCode != null">fqmx_code,</if>
+            <if test="workorderId != null">workorder_id,</if>
+            <if test="workorderCode != null">workorder_code,</if>
+            <if test="brand != null">brand,</if>
+            <if test="batchNumber != null">batch_number,</if>
+            <if test="cuttingParentid != null">cutting_parentid,</if>
+            <if test="width != null">width,</if>
+            <if test="weight != null">weight,</if>
+            <if test="materialCode != null">material_code,</if>
+            <if test="materialName != null">material_name,</if>
+            <if test="userName != null">user_name,</if>
+            <if test="remark != null">remark,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fqmxCode != null">#{fqmxCode},</if>
+            <if test="workorderId != null">#{workorderId},</if>
+            <if test="workorderCode != null">#{workorderCode},</if>
+            <if test="brand != null">#{brand},</if>
+            <if test="batchNumber != null">#{batchNumber},</if>
+            <if test="cuttingParentid != null">#{cuttingParentid},</if>
+            <if test="width != null">#{width},</if>
+            <if test="weight != null">#{weight},</if>
+            <if test="materialCode != null">#{materialCode},</if>
+            <if test="materialName != null">#{materialName},</if>
+            <if test="userName != null">#{userName},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCysFqmx" parameterType="CysFqmx">
+        update cys_fqmx
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fqmxCode != null">fqmx_code = #{fqmxCode},</if>
+            <if test="workorderId != null">workorder_id = #{workorderId},</if>
+            <if test="workorderCode != null">workorder_code = #{workorderCode},</if>
+            <if test="brand != null">brand = #{brand},</if>
+            <if test="batchNumber != null">batch_number = #{batchNumber},</if>
+            <if test="cuttingParentid != null">cutting_parentid = #{cuttingParentid},</if>
+            <if test="width != null">width = #{width},</if>
+            <if test="weight != null">weight = #{weight},</if>
+            <if test="materialCode != null">material_code = #{materialCode},</if>
+            <if test="materialName != null">material_name = #{materialName},</if>
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where fqmx_id = #{fqmxId}
+    </update>
+
+    <delete id="deleteCysFqmxByFqmxId" parameterType="String">
+        delete from cys_fqmx where fqmx_id = #{fqmxId}
+    </delete>
+
+    <delete id="deleteCysFqmxByFqmxIds" parameterType="String">
+        delete from cys_fqmx where fqmx_id in 
+        <foreach item="fqmxId" collection="array" open="(" separator="," close=")">
+            #{fqmxId}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huaan.mes.md.mapper.CysCplbMapper">
+    
+    <resultMap type="CysCplb" id="CysCplbResult">
+        <result property="cplbId"    column="cplb_id"    />
+        <result property="cplbCode"    column="cplb_code"    />
+        <result property="workorderId"    column="workorder_id"    />
+        <result property="workorderCode"    column="workorder_code"    />
+        <result property="brand"    column="brand"    />
+        <result property="batchNumber"    column="batch_number"    />
+        <result property="productStatus"    column="product_status"    />
+        <result property="productThickness"    column="product_thickness"    />
+        <result property="productWidth"    column="product_width"    />
+        <result property="weight"    column="weight"    />
+        <result property="tensileStrength"    column="tensile_strength"    />
+        <result property="elongation"    column="elongation"    />
+        <result property="hardness"    column="hardness"    />
+        <result property="cupConvexValue"    column="cup_convex_value"    />
+        <result property="electricalConductivity"    column="electrical_conductivity"    />
+        <result property="warehouseStatus"    column="warehouse_status"    />
+        <result property="userId"    column="user_id"    />
+        <result property="userName"    column="user_name"    />
+        <result property="remark"    column="remark"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectCysCplbVo">
+        select cplb_id, cplb_code, workorder_id, workorder_code, brand, batch_number, product_status, product_thickness, product_width, weight, tensile_strength, elongation, hardness, cup_convex_value, electrical_conductivity, warehouse_status, user_id, user_name, remark, create_by, create_time, update_by, update_time from cys_cplb
+    </sql>
+
+    <select id="selectCysCplbList" parameterType="CysCplb" resultMap="CysCplbResult">
+        <include refid="selectCysCplbVo"/>
+        <where>  
+            <if test="cplbCode != null  and cplbCode != ''"> and cplb_code = #{cplbCode}</if>
+            <if test="workorderId != null "> and workorder_id = #{workorderId}</if>
+            <if test="workorderCode != null  and workorderCode != ''"> and workorder_code = #{workorderCode}</if>
+            <if test="brand != null  and brand != ''"> and brand = #{brand}</if>
+            <if test="batchNumber != null  and batchNumber != ''"> and batch_number = #{batchNumber}</if>
+            <if test="productStatus != null  and productStatus != ''"> and product_status = #{productStatus}</if>
+            <if test="productThickness != null "> and product_thickness = #{productThickness}</if>
+            <if test="productWidth != null "> and product_width = #{productWidth}</if>
+            <if test="weight != null "> and weight = #{weight}</if>
+            <if test="tensileStrength != null "> and tensile_strength = #{tensileStrength}</if>
+            <if test="elongation != null "> and elongation = #{elongation}</if>
+            <if test="hardness != null "> and hardness = #{hardness}</if>
+            <if test="cupConvexValue != null "> and cup_convex_value = #{cupConvexValue}</if>
+            <if test="warehouseStatus != null  and warehouseStatus != ''"> and warehouse_status = #{warehouseStatus}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCysCplbByCplbId" parameterType="String" resultMap="CysCplbResult">
+        <include refid="selectCysCplbVo"/>
+        where cplb_id = #{cplbId}
+    </select>
+        
+    <insert id="insertCysCplb" parameterType="CysCplb" useGeneratedKeys="true" keyProperty="cplbId">
+        insert into cys_cplb
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cplbCode != null">cplb_code,</if>
+            <if test="workorderId != null">workorder_id,</if>
+            <if test="workorderCode != null">workorder_code,</if>
+            <if test="brand != null">brand,</if>
+            <if test="batchNumber != null">batch_number,</if>
+            <if test="productStatus != null">product_status,</if>
+            <if test="productThickness != null">product_thickness,</if>
+            <if test="productWidth != null">product_width,</if>
+            <if test="weight != null">weight,</if>
+            <if test="tensileStrength != null">tensile_strength,</if>
+            <if test="elongation != null">elongation,</if>
+            <if test="hardness != null">hardness,</if>
+            <if test="cupConvexValue != null">cup_convex_value,</if>
+            <if test="electricalConductivity != null">electrical_conductivity,</if>
+            <if test="warehouseStatus != null">warehouse_status,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="userName != null">user_name,</if>
+            <if test="remark != null">remark,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="cplbCode != null">#{cplbCode},</if>
+            <if test="workorderId != null">#{workorderId},</if>
+            <if test="workorderCode != null">#{workorderCode},</if>
+            <if test="brand != null">#{brand},</if>
+            <if test="batchNumber != null">#{batchNumber},</if>
+            <if test="productStatus != null">#{productStatus},</if>
+            <if test="productThickness != null">#{productThickness},</if>
+            <if test="productWidth != null">#{productWidth},</if>
+            <if test="weight != null">#{weight},</if>
+            <if test="tensileStrength != null">#{tensileStrength},</if>
+            <if test="elongation != null">#{elongation},</if>
+            <if test="hardness != null">#{hardness},</if>
+            <if test="cupConvexValue != null">#{cupConvexValue},</if>
+            <if test="electricalConductivity != null">#{electricalConductivity},</if>
+            <if test="warehouseStatus != null">#{warehouseStatus},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="userName != null">#{userName},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCysCplb" parameterType="CysCplb">
+        update cys_cplb
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="cplbCode != null">cplb_code = #{cplbCode},</if>
+            <if test="workorderId != null">workorder_id = #{workorderId},</if>
+            <if test="workorderCode != null">workorder_code = #{workorderCode},</if>
+            <if test="brand != null">brand = #{brand},</if>
+            <if test="batchNumber != null">batch_number = #{batchNumber},</if>
+            <if test="productStatus != null">product_status = #{productStatus},</if>
+            <if test="productThickness != null">product_thickness = #{productThickness},</if>
+            <if test="productWidth != null">product_width = #{productWidth},</if>
+            <if test="weight != null">weight = #{weight},</if>
+            <if test="tensileStrength != null">tensile_strength = #{tensileStrength},</if>
+            <if test="elongation != null">elongation = #{elongation},</if>
+            <if test="hardness != null">hardness = #{hardness},</if>
+            <if test="cupConvexValue != null">cup_convex_value = #{cupConvexValue},</if>
+            <if test="electricalConductivity != null">electrical_conductivity = #{electricalConductivity},</if>
+            <if test="warehouseStatus != null">warehouse_status = #{warehouseStatus},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where cplb_id = #{cplbId}
+    </update>
+
+    <delete id="deleteCysCplbByCplbId" parameterType="String">
+        delete from cys_cplb where cplb_id = #{cplbId}
+    </delete>
+
+    <delete id="deleteCysCplbByCplbIds" parameterType="String">
+        delete from cys_cplb where cplb_id in 
+        <foreach item="cplbId" collection="array" open="(" separator="," close=")">
+            #{cplbId}
+        </foreach>
+    </delete>
+</mapper>

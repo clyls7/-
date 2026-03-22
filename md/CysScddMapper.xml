@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huaan.mes.md.mapper.CysScddMapper">
+    
+    <resultMap type="CysScdd" id="CysScddResult">
+        <result property="porderId"    column="porder_id"    />
+        <result property="porderCode"    column="porder_code"    />
+        <result property="porderName"    column="porder_name"    />
+        <result property="brand"    column="brand"    />
+        <result property="orderSource"    column="order_source"    />
+        <result property="plannedOrdersCode"    column="planned_orders_code"    />
+        <result property="workCount"    column="work_count"    />
+        <result property="demandTime"    column="demand_time"    />
+        <result property="itemId"    column="item_id"    />
+        <result property="itemCode"    column="item_code"    />
+        <result property="itemName"    column="item_name"    />
+        <result property="unit"    column="unit"    />
+        <result property="clientId"    column="client_id"    />
+        <result property="clientCode"    column="client_code"    />
+        <result property="clientName"    column="client_name"    />
+        <result property="performanceReq"    column="performance_req"    />
+        <result property="qualityReq"    column="quality_req"    />
+        <result property="packageReq"    column="package_req"    />
+        <result property="remark"    column="remark"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectCysScddVo">
+        select porder_id, porder_code, porder_name, brand, order_source, planned_orders_code, work_count, demand_time, item_id, item_code, item_name, unit, client_id, client_code, client_name, performance_req, quality_req, package_req, remark, status, create_by, create_time, update_by, update_time from cys_scdd
+    </sql>
+
+    <select id="selectCysScddList" parameterType="CysScdd" resultMap="CysScddResult">
+        <include refid="selectCysScddVo"/>
+        <where>  
+            <if test="porderCode != null  and porderCode != ''"> and porder_code = #{porderCode}</if>
+            <if test="porderName != null  and porderName != ''"> and porder_name like concat('%', #{porderName}, '%')</if>
+            <if test="brand != null  and brand != ''"> and brand = #{brand}</if>
+            <if test="orderSource != null  and orderSource != ''"> and order_source = #{orderSource}</if>
+            <if test="plannedOrdersCode != null  and plannedOrdersCode != ''"> and planned_orders_code = #{plannedOrdersCode}</if>
+            <if test="workCount != null "> and work_count = #{workCount}</if>
+            <if test="demandTime != null "> and demand_time = #{demandTime}</if>
+            <if test="itemId != null  and itemId != ''"> and item_id = #{itemId}</if>
+            <if test="itemCode != null  and itemCode != ''"> and item_code = #{itemCode}</if>
+            <if test="itemName != null  and itemName != ''"> and item_name like concat('%', #{itemName}, '%')</if>
+            <if test="unit != null  and unit != ''"> and unit = #{unit}</if>
+            <if test="clientId != null "> and client_id = #{clientId}</if>
+            <if test="clientCode != null  and clientCode != ''"> and client_code = #{clientCode}</if>
+            <if test="clientName != null  and clientName != ''"> and client_name like concat('%', #{clientName}, '%')</if>
+            <if test="performanceReq != null  and performanceReq != ''"> and performance_req = #{performanceReq}</if>
+            <if test="qualityReq != null  and qualityReq != ''"> and quality_req = #{qualityReq}</if>
+            <if test="packageReq != null  and packageReq != ''"> and package_req = #{packageReq}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
+    
+    <select id="selectCysScddByPorderId" parameterType="Long" resultMap="CysScddResult">
+        <include refid="selectCysScddVo"/>
+        where porder_id = #{porderId}
+    </select>
+        
+    <insert id="insertCysScdd" parameterType="CysScdd" useGeneratedKeys="true" keyProperty="porderId">
+        insert into cys_scdd
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="porderCode != null">porder_code,</if>
+            <if test="porderName != null">porder_name,</if>
+            <if test="brand != null">brand,</if>
+            <if test="orderSource != null">order_source,</if>
+            <if test="plannedOrdersCode != null">planned_orders_code,</if>
+            <if test="workCount != null">work_count,</if>
+            <if test="demandTime != null">demand_time,</if>
+            <if test="itemId != null">item_id,</if>
+            <if test="itemCode != null">item_code,</if>
+            <if test="itemName != null">item_name,</if>
+            <if test="unit != null">unit,</if>
+            <if test="clientId != null">client_id,</if>
+            <if test="clientCode != null">client_code,</if>
+            <if test="clientName != null">client_name,</if>
+            <if test="performanceReq != null">performance_req,</if>
+            <if test="qualityReq != null">quality_req,</if>
+            <if test="packageReq != null">package_req,</if>
+            <if test="remark != null">remark,</if>
+            <if test="status != null">status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="porderCode != null">#{porderCode},</if>
+            <if test="porderName != null">#{porderName},</if>
+            <if test="brand != null">#{brand},</if>
+            <if test="orderSource != null">#{orderSource},</if>
+            <if test="plannedOrdersCode != null">#{plannedOrdersCode},</if>
+            <if test="workCount != null">#{workCount},</if>
+            <if test="demandTime != null">#{demandTime},</if>
+            <if test="itemId != null">#{itemId},</if>
+            <if test="itemCode != null">#{itemCode},</if>
+            <if test="itemName != null">#{itemName},</if>
+            <if test="unit != null">#{unit},</if>
+            <if test="clientId != null">#{clientId},</if>
+            <if test="clientCode != null">#{clientCode},</if>
+            <if test="clientName != null">#{clientName},</if>
+            <if test="performanceReq != null">#{performanceReq},</if>
+            <if test="qualityReq != null">#{qualityReq},</if>
+            <if test="packageReq != null">#{packageReq},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCysScdd" parameterType="CysScdd">
+        update cys_scdd
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="porderCode != null">porder_code = #{porderCode},</if>
+            <if test="porderName != null">porder_name = #{porderName},</if>
+            <if test="brand != null">brand = #{brand},</if>
+            <if test="orderSource != null">order_source = #{orderSource},</if>
+            <if test="plannedOrdersCode != null">planned_orders_code = #{plannedOrdersCode},</if>
+            <if test="workCount != null">work_count = #{workCount},</if>
+            <if test="demandTime != null">demand_time = #{demandTime},</if>
+            <if test="itemId != null">item_id = #{itemId},</if>
+            <if test="itemCode != null">item_code = #{itemCode},</if>
+            <if test="itemName != null">item_name = #{itemName},</if>
+            <if test="unit != null">unit = #{unit},</if>
+            <if test="clientId != null">client_id = #{clientId},</if>
+            <if test="clientCode != null">client_code = #{clientCode},</if>
+            <if test="clientName != null">client_name = #{clientName},</if>
+            <if test="performanceReq != null">performance_req = #{performanceReq},</if>
+            <if test="qualityReq != null">quality_req = #{qualityReq},</if>
+            <if test="packageReq != null">package_req = #{packageReq},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where porder_id = #{porderId}
+    </update>
+
+    <delete id="deleteCysScddByPorderId" parameterType="Long">
+        delete from cys_scdd where porder_id = #{porderId}
+    </delete>
+
+    <delete id="deleteCysScddByPorderIds" parameterType="String">
+        delete from cys_scdd where porder_id in 
+        <foreach item="porderId" collection="array" open="(" separator="," close=")">
+            #{porderId}
+        </foreach>
+    </delete>
+</mapper>

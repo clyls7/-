@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huaan.mes.md.mapper.CysJjbMapper">
+    
+    <resultMap type="CysJjb" id="CysJjbResult">
+        <result property="trimId"    column="trim_id"    />
+        <result property="trimCode"    column="trim_code"    />
+        <result property="workorderId"    column="workorder_id"    />
+        <result property="workorderCode"    column="workorder_code"    />
+        <result property="brand"    column="brand"    />
+        <result property="batchNumber"    column="batch_number"    />
+        <result property="productStatus"    column="product_status"    />
+        <result property="productThickness"    column="product_thickness"    />
+        <result property="productWidth"    column="product_width"    />
+        <result property="weightBeforeTrim"    column="weight_before_trim"    />
+        <result property="weightAfterTrim"    column="weight_after_trim"    />
+        <result property="widthBeforeTrim"    column="width_before_trim"    />
+        <result property="widthAfterTrim"    column="width_after_trim"    />
+        <result property="trimTime"    column="trim_time"    />
+        <result property="userId"    column="user_id"    />
+        <result property="userName"    column="user_name"    />
+        <result property="qualityJudgment"    column="quality_judgment"    />
+        <result property="abnormalCause"    column="abnormal_cause"    />
+        <result property="remark"    column="remark"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectCysJjbVo">
+        select trim_id, trim_code, workorder_id, workorder_code, brand, batch_number, product_status, product_thickness, product_width, weight_before_trim, weight_after_trim, width_before_trim, width_after_trim, trim_time, user_id, user_name, quality_judgment, abnormal_cause, remark, create_by, create_time, update_by, update_time from cys_jjb
+    </sql>
+
+    <select id="selectCysJjbList" parameterType="CysJjb" resultMap="CysJjbResult">
+        <include refid="selectCysJjbVo"/>
+        <where>  
+            <if test="trimCode != null  and trimCode != ''"> and trim_code = #{trimCode}</if>
+            <if test="workorderId != null "> and workorder_id = #{workorderId}</if>
+            <if test="workorderCode != null  and workorderCode != ''"> and workorder_code = #{workorderCode}</if>
+            <if test="brand != null  and brand != ''"> and brand = #{brand}</if>
+            <if test="batchNumber != null  and batchNumber != ''"> and batch_number = #{batchNumber}</if>
+            <if test="productStatus != null  and productStatus != ''"> and product_status = #{productStatus}</if>
+            <if test="productThickness != null "> and product_thickness = #{productThickness}</if>
+            <if test="productWidth != null "> and product_width = #{productWidth}</if>
+            <if test="weightBeforeTrim != null "> and weight_before_trim = #{weightBeforeTrim}</if>
+            <if test="weightAfterTrim != null "> and weight_after_trim = #{weightAfterTrim}</if>
+            <if test="widthBeforeTrim != null "> and width_before_trim = #{widthBeforeTrim}</if>
+            <if test="widthAfterTrim != null "> and width_after_trim = #{widthAfterTrim}</if>
+            <if test="trimTime != null "> and trim_time = #{trimTime}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="qualityJudgment != null  and qualityJudgment != ''"> and quality_judgment = #{qualityJudgment}</if>
+            <if test="abnormalCause != null  and abnormalCause != ''"> and abnormal_cause = #{abnormalCause}</if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
+    
+    <select id="selectCysJjbByTrimId" parameterType="String" resultMap="CysJjbResult">
+        <include refid="selectCysJjbVo"/>
+        where trim_id = #{trimId}
+    </select>
+        
+    <insert id="insertCysJjb" parameterType="CysJjb" useGeneratedKeys="true" keyProperty="trimId">
+        insert into cys_jjb
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="trimCode != null">trim_code,</if>
+            <if test="workorderId != null">workorder_id,</if>
+            <if test="workorderCode != null">workorder_code,</if>
+            <if test="brand != null">brand,</if>
+            <if test="batchNumber != null">batch_number,</if>
+            <if test="productStatus != null">product_status,</if>
+            <if test="productThickness != null">product_thickness,</if>
+            <if test="productWidth != null">product_width,</if>
+            <if test="weightBeforeTrim != null">weight_before_trim,</if>
+            <if test="weightAfterTrim != null">weight_after_trim,</if>
+            <if test="widthBeforeTrim != null">width_before_trim,</if>
+            <if test="widthAfterTrim != null">width_after_trim,</if>
+            <if test="trimTime != null">trim_time,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="userName != null">user_name,</if>
+            <if test="qualityJudgment != null">quality_judgment,</if>
+            <if test="abnormalCause != null">abnormal_cause,</if>
+            <if test="remark != null">remark,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="trimCode != null">#{trimCode},</if>
+            <if test="workorderId != null">#{workorderId},</if>
+            <if test="workorderCode != null">#{workorderCode},</if>
+            <if test="brand != null">#{brand},</if>
+            <if test="batchNumber != null">#{batchNumber},</if>
+            <if test="productStatus != null">#{productStatus},</if>
+            <if test="productThickness != null">#{productThickness},</if>
+            <if test="productWidth != null">#{productWidth},</if>
+            <if test="weightBeforeTrim != null">#{weightBeforeTrim},</if>
+            <if test="weightAfterTrim != null">#{weightAfterTrim},</if>
+            <if test="widthBeforeTrim != null">#{widthBeforeTrim},</if>
+            <if test="widthAfterTrim != null">#{widthAfterTrim},</if>
+            <if test="trimTime != null">#{trimTime},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="userName != null">#{userName},</if>
+            <if test="qualityJudgment != null">#{qualityJudgment},</if>
+            <if test="abnormalCause != null">#{abnormalCause},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCysJjb" parameterType="CysJjb">
+        update cys_jjb
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="trimCode != null">trim_code = #{trimCode},</if>
+            <if test="workorderId != null">workorder_id = #{workorderId},</if>
+            <if test="workorderCode != null">workorder_code = #{workorderCode},</if>
+            <if test="brand != null">brand = #{brand},</if>
+            <if test="batchNumber != null">batch_number = #{batchNumber},</if>
+            <if test="productStatus != null">product_status = #{productStatus},</if>
+            <if test="productThickness != null">product_thickness = #{productThickness},</if>
+            <if test="productWidth != null">product_width = #{productWidth},</if>
+            <if test="weightBeforeTrim != null">weight_before_trim = #{weightBeforeTrim},</if>
+            <if test="weightAfterTrim != null">weight_after_trim = #{weightAfterTrim},</if>
+            <if test="widthBeforeTrim != null">width_before_trim = #{widthBeforeTrim},</if>
+            <if test="widthAfterTrim != null">width_after_trim = #{widthAfterTrim},</if>
+            <if test="trimTime != null">trim_time = #{trimTime},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="qualityJudgment != null">quality_judgment = #{qualityJudgment},</if>
+            <if test="abnormalCause != null">abnormal_cause = #{abnormalCause},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where trim_id = #{trimId}
+    </update>
+
+    <delete id="deleteCysJjbByTrimId" parameterType="String">
+        delete from cys_jjb where trim_id = #{trimId}
+    </delete>
+
+    <delete id="deleteCysJjbByTrimIds" parameterType="String">
+        delete from cys_jjb where trim_id in 
+        <foreach item="trimId" collection="array" open="(" separator="," close=")">
+            #{trimId}
+        </foreach>
+    </delete>
+</mapper>

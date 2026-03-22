@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huaan.mes.md.mapper.CysThMapper">
+    
+    <resultMap type="CysTh" id="CysThResult">
+        <result property="annealingId"    column="annealing_id"    />
+        <result property="annealingCode"    column="annealing_code"    />
+        <result property="workorderId"    column="workorder_id"    />
+        <result property="workorderCode"    column="workorder_code"    />
+        <result property="brand"    column="brand"    />
+        <result property="batchNumber"    column="batch_number"    />
+        <result property="productStatus"    column="product_status"    />
+        <result property="productThickness"    column="product_thickness"    />
+        <result property="productWidth"    column="product_width"    />
+        <result property="annealingCount"    column="annealing_count"    />
+        <result property="furnaceNo"    column="furnace_no"    />
+        <result property="location"    column="location"    />
+        <result property="specification"    column="specification"    />
+        <result property="heatingTemperature"    column="heating_temperature"    />
+        <result property="heatingTime"    column="heating_time"    />
+        <result property="insulationTime"    column="Insulation_time"    />
+        <result property="weight"    column="weight"    />
+        <result property="annealingTime"    column="annealing_time"    />
+        <result property="userId"    column="user_id"    />
+        <result property="userName"    column="user_name"    />
+        <result property="qualityJudgment"    column="quality_judgment"    />
+        <result property="abnormalCause"    column="abnormal_cause"    />
+        <result property="remark"    column="remark"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectCysThVo">
+        select annealing_id, annealing_code, workorder_id, workorder_code, brand, batch_number, product_status, product_thickness, product_width, annealing_count, furnace_no, location, specification, heating_temperature, heating_time, Insulation_time, weight, annealing_time, user_id, user_name, quality_judgment, abnormal_cause, remark, create_by, create_time, update_by, update_time from cys_th
+    </sql>
+
+    <select id="selectCysThList" parameterType="CysTh" resultMap="CysThResult">
+        <include refid="selectCysThVo"/>
+        <where>  
+            <if test="annealingCode != null  and annealingCode != ''"> and annealing_code = #{annealingCode}</if>
+            <if test="workorderId != null "> and workorder_id = #{workorderId}</if>
+            <if test="workorderCode != null  and workorderCode != ''"> and workorder_code = #{workorderCode}</if>
+            <if test="brand != null  and brand != ''"> and brand = #{brand}</if>
+            <if test="batchNumber != null  and batchNumber != ''"> and batch_number = #{batchNumber}</if>
+            <if test="productStatus != null  and productStatus != ''"> and product_status = #{productStatus}</if>
+            <if test="productThickness != null "> and product_thickness = #{productThickness}</if>
+            <if test="productWidth != null "> and product_width = #{productWidth}</if>
+            <if test="annealingCount != null "> and annealing_count = #{annealingCount}</if>
+            <if test="furnaceNo != null  and furnaceNo != ''"> and furnace_no = #{furnaceNo}</if>
+            <if test="location != null  and location != ''"> and location = #{location}</if>
+            <if test="specification != null "> and specification = #{specification}</if>
+            <if test="heatingTemperature != null "> and heating_temperature = #{heatingTemperature}</if>
+            <if test="heatingTime != null "> and heating_time = #{heatingTime}</if>
+            <if test="insulationTime != null "> and Insulation_time = #{insulationTime}</if>
+            <if test="weight != null "> and weight = #{weight}</if>
+            <if test="annealingTime != null "> and annealing_time = #{annealingTime}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="qualityJudgment != null  and qualityJudgment != ''"> and quality_judgment = #{qualityJudgment}</if>
+            <if test="abnormalCause != null  and abnormalCause != ''"> and abnormal_cause = #{abnormalCause}</if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
+    
+    <select id="selectCysThByAnnealingId" parameterType="String" resultMap="CysThResult">
+        <include refid="selectCysThVo"/>
+        where annealing_id = #{annealingId}
+    </select>
+        
+    <insert id="insertCysTh" parameterType="CysTh" useGeneratedKeys="true" keyProperty="annealingId">
+        insert into cys_th
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="annealingCode != null">annealing_code,</if>
+            <if test="workorderId != null">workorder_id,</if>
+            <if test="workorderCode != null">workorder_code,</if>
+            <if test="brand != null">brand,</if>
+            <if test="batchNumber != null">batch_number,</if>
+            <if test="productStatus != null">product_status,</if>
+            <if test="productThickness != null">product_thickness,</if>
+            <if test="productWidth != null">product_width,</if>
+            <if test="annealingCount != null">annealing_count,</if>
+            <if test="furnaceNo != null">furnace_no,</if>
+            <if test="location != null">location,</if>
+            <if test="specification != null">specification,</if>
+            <if test="heatingTemperature != null">heating_temperature,</if>
+            <if test="heatingTime != null">heating_time,</if>
+            <if test="insulationTime != null">Insulation_time,</if>
+            <if test="weight != null">weight,</if>
+            <if test="annealingTime != null">annealing_time,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="userName != null">user_name,</if>
+            <if test="qualityJudgment != null">quality_judgment,</if>
+            <if test="abnormalCause != null">abnormal_cause,</if>
+            <if test="remark != null">remark,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="annealingCode != null">#{annealingCode},</if>
+            <if test="workorderId != null">#{workorderId},</if>
+            <if test="workorderCode != null">#{workorderCode},</if>
+            <if test="brand != null">#{brand},</if>
+            <if test="batchNumber != null">#{batchNumber},</if>
+            <if test="productStatus != null">#{productStatus},</if>
+            <if test="productThickness != null">#{productThickness},</if>
+            <if test="productWidth != null">#{productWidth},</if>
+            <if test="annealingCount != null">#{annealingCount},</if>
+            <if test="furnaceNo != null">#{furnaceNo},</if>
+            <if test="location != null">#{location},</if>
+            <if test="specification != null">#{specification},</if>
+            <if test="heatingTemperature != null">#{heatingTemperature},</if>
+            <if test="heatingTime != null">#{heatingTime},</if>
+            <if test="insulationTime != null">#{insulationTime},</if>
+            <if test="weight != null">#{weight},</if>
+            <if test="annealingTime != null">#{annealingTime},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="userName != null">#{userName},</if>
+            <if test="qualityJudgment != null">#{qualityJudgment},</if>
+            <if test="abnormalCause != null">#{abnormalCause},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCysTh" parameterType="CysTh">
+        update cys_th
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="annealingCode != null">annealing_code = #{annealingCode},</if>
+            <if test="workorderId != null">workorder_id = #{workorderId},</if>
+            <if test="workorderCode != null">workorder_code = #{workorderCode},</if>
+            <if test="brand != null">brand = #{brand},</if>
+            <if test="batchNumber != null">batch_number = #{batchNumber},</if>
+            <if test="productStatus != null">product_status = #{productStatus},</if>
+            <if test="productThickness != null">product_thickness = #{productThickness},</if>
+            <if test="productWidth != null">product_width = #{productWidth},</if>
+            <if test="annealingCount != null">annealing_count = #{annealingCount},</if>
+            <if test="furnaceNo != null">furnace_no = #{furnaceNo},</if>
+            <if test="location != null">location = #{location},</if>
+            <if test="specification != null">specification = #{specification},</if>
+            <if test="heatingTemperature != null">heating_temperature = #{heatingTemperature},</if>
+            <if test="heatingTime != null">heating_time = #{heatingTime},</if>
+            <if test="insulationTime != null">Insulation_time = #{insulationTime},</if>
+            <if test="weight != null">weight = #{weight},</if>
+            <if test="annealingTime != null">annealing_time = #{annealingTime},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="qualityJudgment != null">quality_judgment = #{qualityJudgment},</if>
+            <if test="abnormalCause != null">abnormal_cause = #{abnormalCause},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where annealing_id = #{annealingId}
+    </update>
+
+    <delete id="deleteCysThByAnnealingId" parameterType="String">
+        delete from cys_th where annealing_id = #{annealingId}
+    </delete>
+
+    <delete id="deleteCysThByAnnealingIds" parameterType="String">
+        delete from cys_th where annealing_id in 
+        <foreach item="annealingId" collection="array" open="(" separator="," close=")">
+            #{annealingId}
+        </foreach>
+    </delete>
+</mapper>

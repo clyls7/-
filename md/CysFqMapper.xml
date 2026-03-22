@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huaan.mes.md.mapper.CysFqMapper">
+    
+    <resultMap type="CysFq" id="CysFqResult">
+        <result property="fqId"    column="fq_id"    />
+        <result property="fqCode"    column="fq_code"    />
+        <result property="workorderId"    column="workorder_id"    />
+        <result property="workorderCode"    column="workorder_code"    />
+        <result property="brand"    column="brand"    />
+        <result property="batchNumber"    column="batch_number"    />
+        <result property="weight"    column="weight"    />
+        <result property="productThickness"    column="product_thickness"    />
+        <result property="productWidth"    column="product_width"    />
+        <result property="productStatus"    column="product_status"    />
+        <result property="cuttingStatus"    column="cutting_status"    />
+        <result property="cuttingSections"    column="cutting_sections"    />
+        <result property="userId"    column="user_id"    />
+        <result property="userName"    column="user_name"    />
+        <result property="remark"    column="remark"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectCysFqVo">
+        select fq_id, fq_code, workorder_id, workorder_code, brand, batch_number, weight, product_thickness, product_width, product_status, cutting_status, cutting_sections, user_id, user_name, remark, create_by, create_time, update_by, update_time from cys_fq
+    </sql>
+
+    <select id="selectCysFqList" parameterType="CysFq" resultMap="CysFqResult">
+        <include refid="selectCysFqVo"/>
+        <where>  
+            <if test="fqCode != null  and fqCode != ''"> and fq_code = #{fqCode}</if>
+            <if test="workorderId != null "> and workorder_id = #{workorderId}</if>
+            <if test="workorderCode != null  and workorderCode != ''"> and workorder_code = #{workorderCode}</if>
+            <if test="brand != null  and brand != ''"> and brand = #{brand}</if>
+            <if test="batchNumber != null  and batchNumber != ''"> and batch_number = #{batchNumber}</if>
+            <if test="weight != null "> and weight = #{weight}</if>
+            <if test="productThickness != null "> and product_thickness = #{productThickness}</if>
+            <if test="productWidth != null "> and product_width = #{productWidth}</if>
+            <if test="productStatus != null  and productStatus != ''"> and product_status = #{productStatus}</if>
+            <if test="cuttingStatus != null  and cuttingStatus != ''"> and cutting_status = #{cuttingStatus}</if>
+            <if test="cuttingSections != null "> and cutting_sections = #{cuttingSections}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCysFqByFqId" parameterType="String" resultMap="CysFqResult">
+        <include refid="selectCysFqVo"/>
+        where fq_id = #{fqId}
+    </select>
+        
+    <insert id="insertCysFq" parameterType="CysFq" useGeneratedKeys="true" keyProperty="fqId">
+        insert into cys_fq
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fqCode != null">fq_code,</if>
+            <if test="workorderId != null">workorder_id,</if>
+            <if test="workorderCode != null">workorder_code,</if>
+            <if test="brand != null">brand,</if>
+            <if test="batchNumber != null">batch_number,</if>
+            <if test="weight != null">weight,</if>
+            <if test="productThickness != null">product_thickness,</if>
+            <if test="productWidth != null">product_width,</if>
+            <if test="productStatus != null">product_status,</if>
+            <if test="cuttingStatus != null">cutting_status,</if>
+            <if test="cuttingSections != null">cutting_sections,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="userName != null">user_name,</if>
+            <if test="remark != null">remark,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fqCode != null">#{fqCode},</if>
+            <if test="workorderId != null">#{workorderId},</if>
+            <if test="workorderCode != null">#{workorderCode},</if>
+            <if test="brand != null">#{brand},</if>
+            <if test="batchNumber != null">#{batchNumber},</if>
+            <if test="weight != null">#{weight},</if>
+            <if test="productThickness != null">#{productThickness},</if>
+            <if test="productWidth != null">#{productWidth},</if>
+            <if test="productStatus != null">#{productStatus},</if>
+            <if test="cuttingStatus != null">#{cuttingStatus},</if>
+            <if test="cuttingSections != null">#{cuttingSections},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="userName != null">#{userName},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCysFq" parameterType="CysFq">
+        update cys_fq
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fqCode != null">fq_code = #{fqCode},</if>
+            <if test="workorderId != null">workorder_id = #{workorderId},</if>
+            <if test="workorderCode != null">workorder_code = #{workorderCode},</if>
+            <if test="brand != null">brand = #{brand},</if>
+            <if test="batchNumber != null">batch_number = #{batchNumber},</if>
+            <if test="weight != null">weight = #{weight},</if>
+            <if test="productThickness != null">product_thickness = #{productThickness},</if>
+            <if test="productWidth != null">product_width = #{productWidth},</if>
+            <if test="productStatus != null">product_status = #{productStatus},</if>
+            <if test="cuttingStatus != null">cutting_status = #{cuttingStatus},</if>
+            <if test="cuttingSections != null">cutting_sections = #{cuttingSections},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where fq_id = #{fqId}
+    </update>
+
+    <delete id="deleteCysFqByFqId" parameterType="String">
+        delete from cys_fq where fq_id = #{fqId}
+    </delete>
+
+    <delete id="deleteCysFqByFqIds" parameterType="String">
+        delete from cys_fq where fq_id in 
+        <foreach item="fqId" collection="array" open="(" separator="," close=")">
+            #{fqId}
+        </foreach>
+    </delete>
+</mapper>

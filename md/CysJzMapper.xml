@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huaan.mes.md.mapper.CysJzMapper">
+    
+    <resultMap type="CysJz" id="CysJzResult">
+        <result property="finishrId"    column="finishr_id"    />
+        <result property="finishrCode"    column="finishr_code"    />
+        <result property="workorderId"    column="workorder_id"    />
+        <result property="workorderCode"    column="workorder_code"    />
+        <result property="brand"    column="brand"    />
+        <result property="batchNumber"    column="batch_number"    />
+        <result property="productStatus"    column="product_status"    />
+        <result property="productThickness"    column="product_thickness"    />
+        <result property="productWidth"    column="product_width"    />
+        <result property="finishrollCount"    column="finishroll_count"    />
+        <result property="finishrollEquipment"    column="finishroll_equipment"    />
+        <result property="weightBeforeRoll"    column="weight_before_roll"    />
+        <result property="weightAfterRoll"    column="weight_after_roll"    />
+        <result property="speBeforeRoll"    column="spe_before_roll"    />
+        <result property="speAfterRoll"    column="spe_after_roll"    />
+        <result property="finishrTime"    column="finishr_time"    />
+        <result property="userId"    column="user_id"    />
+        <result property="userName"    column="user_name"    />
+        <result property="qualityJudgment"    column="quality_judgment"    />
+        <result property="abnormalCause"    column="abnormal_cause"    />
+        <result property="remark"    column="remark"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectCysJzVo">
+        select finishr_id, finishr_code, workorder_id, workorder_code, brand, batch_number, product_status, product_thickness, product_width, finishroll_count, finishroll_equipment, weight_before_roll, weight_after_roll, spe_before_roll, spe_after_roll, finishr_time, user_id, user_name, quality_judgment, abnormal_cause, remark, create_by, create_time, update_by, update_time from cys_jz
+    </sql>
+
+    <select id="selectCysJzList" parameterType="CysJz" resultMap="CysJzResult">
+        <include refid="selectCysJzVo"/>
+        <where>  
+            <if test="finishrCode != null  and finishrCode != ''"> and finishr_code = #{finishrCode}</if>
+            <if test="workorderId != null "> and workorder_id = #{workorderId}</if>
+            <if test="workorderCode != null  and workorderCode != ''"> and workorder_code = #{workorderCode}</if>
+            <if test="brand != null  and brand != ''"> and brand = #{brand}</if>
+            <if test="batchNumber != null  and batchNumber != ''"> and batch_number = #{batchNumber}</if>
+            <if test="productStatus != null  and productStatus != ''"> and product_status = #{productStatus}</if>
+            <if test="productThickness != null "> and product_thickness = #{productThickness}</if>
+            <if test="productWidth != null "> and product_width = #{productWidth}</if>
+            <if test="finishrollCount != null "> and finishroll_count = #{finishrollCount}</if>
+            <if test="finishrollEquipment != null  and finishrollEquipment != ''"> and finishroll_equipment = #{finishrollEquipment}</if>
+            <if test="weightBeforeRoll != null "> and weight_before_roll = #{weightBeforeRoll}</if>
+            <if test="weightAfterRoll != null "> and weight_after_roll = #{weightAfterRoll}</if>
+            <if test="speBeforeRoll != null "> and spe_before_roll = #{speBeforeRoll}</if>
+            <if test="speAfterRoll != null "> and spe_after_roll = #{speAfterRoll}</if>
+            <if test="finishrTime != null "> and finishr_time = #{finishrTime}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="qualityJudgment != null  and qualityJudgment != ''"> and quality_judgment = #{qualityJudgment}</if>
+            <if test="abnormalCause != null  and abnormalCause != ''"> and abnormal_cause = #{abnormalCause}</if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
+    
+    <select id="selectCysJzByFinishrId" parameterType="String" resultMap="CysJzResult">
+        <include refid="selectCysJzVo"/>
+        where finishr_id = #{finishrId}
+    </select>
+        
+    <insert id="insertCysJz" parameterType="CysJz" useGeneratedKeys="true" keyProperty="finishrId">
+        insert into cys_jz
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="finishrCode != null">finishr_code,</if>
+            <if test="workorderId != null">workorder_id,</if>
+            <if test="workorderCode != null">workorder_code,</if>
+            <if test="brand != null">brand,</if>
+            <if test="batchNumber != null">batch_number,</if>
+            <if test="productStatus != null">product_status,</if>
+            <if test="productThickness != null">product_thickness,</if>
+            <if test="productWidth != null">product_width,</if>
+            <if test="finishrollCount != null">finishroll_count,</if>
+            <if test="finishrollEquipment != null">finishroll_equipment,</if>
+            <if test="weightBeforeRoll != null">weight_before_roll,</if>
+            <if test="weightAfterRoll != null">weight_after_roll,</if>
+            <if test="speBeforeRoll != null">spe_before_roll,</if>
+            <if test="speAfterRoll != null">spe_after_roll,</if>
+            <if test="finishrTime != null">finishr_time,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="userName != null">user_name,</if>
+            <if test="qualityJudgment != null">quality_judgment,</if>
+            <if test="abnormalCause != null">abnormal_cause,</if>
+            <if test="remark != null">remark,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="finishrCode != null">#{finishrCode},</if>
+            <if test="workorderId != null">#{workorderId},</if>
+            <if test="workorderCode != null">#{workorderCode},</if>
+            <if test="brand != null">#{brand},</if>
+            <if test="batchNumber != null">#{batchNumber},</if>
+            <if test="productStatus != null">#{productStatus},</if>
+            <if test="productThickness != null">#{productThickness},</if>
+            <if test="productWidth != null">#{productWidth},</if>
+            <if test="finishrollCount != null">#{finishrollCount},</if>
+            <if test="finishrollEquipment != null">#{finishrollEquipment},</if>
+            <if test="weightBeforeRoll != null">#{weightBeforeRoll},</if>
+            <if test="weightAfterRoll != null">#{weightAfterRoll},</if>
+            <if test="speBeforeRoll != null">#{speBeforeRoll},</if>
+            <if test="speAfterRoll != null">#{speAfterRoll},</if>
+            <if test="finishrTime != null">#{finishrTime},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="userName != null">#{userName},</if>
+            <if test="qualityJudgment != null">#{qualityJudgment},</if>
+            <if test="abnormalCause != null">#{abnormalCause},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCysJz" parameterType="CysJz">
+        update cys_jz
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="finishrCode != null">finishr_code = #{finishrCode},</if>
+            <if test="workorderId != null">workorder_id = #{workorderId},</if>
+            <if test="workorderCode != null">workorder_code = #{workorderCode},</if>
+            <if test="brand != null">brand = #{brand},</if>
+            <if test="batchNumber != null">batch_number = #{batchNumber},</if>
+            <if test="productStatus != null">product_status = #{productStatus},</if>
+            <if test="productThickness != null">product_thickness = #{productThickness},</if>
+            <if test="productWidth != null">product_width = #{productWidth},</if>
+            <if test="finishrollCount != null">finishroll_count = #{finishrollCount},</if>
+            <if test="finishrollEquipment != null">finishroll_equipment = #{finishrollEquipment},</if>
+            <if test="weightBeforeRoll != null">weight_before_roll = #{weightBeforeRoll},</if>
+            <if test="weightAfterRoll != null">weight_after_roll = #{weightAfterRoll},</if>
+            <if test="speBeforeRoll != null">spe_before_roll = #{speBeforeRoll},</if>
+            <if test="speAfterRoll != null">spe_after_roll = #{speAfterRoll},</if>
+            <if test="finishrTime != null">finishr_time = #{finishrTime},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="qualityJudgment != null">quality_judgment = #{qualityJudgment},</if>
+            <if test="abnormalCause != null">abnormal_cause = #{abnormalCause},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where finishr_id = #{finishrId}
+    </update>
+
+    <delete id="deleteCysJzByFinishrId" parameterType="String">
+        delete from cys_jz where finishr_id = #{finishrId}
+    </delete>
+
+    <delete id="deleteCysJzByFinishrIds" parameterType="String">
+        delete from cys_jz where finishr_id in 
+        <foreach item="finishrId" collection="array" open="(" separator="," close=")">
+            #{finishrId}
+        </foreach>
+    </delete>
+</mapper>
